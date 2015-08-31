@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var slice = __webpack_require__(139);
 	var _getTableProps = __webpack_require__(140);
 	var getGroupedRows = __webpack_require__(145);
-	var renderMenu = __webpack_require__(142);
+	var renderMenu = __webpack_require__(141);
 
 	var preventDefault = __webpack_require__(146);
 
@@ -176,6 +176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    componentDidMount: function componentDidMount() {
 	        window.addEventListener('click', this.windowClickListener = this.onWindowClick);
+	        // this.checkRowHeight(this.props)
 	    },
 
 	    componentWillUnmount: function componentWillUnmount() {
@@ -254,7 +255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var prevIndex = this.state.startIndex || 0;
 	            var renderStartIndex = Math.ceil(scrollTop / props.rowHeight);
 
-	            state.startIndex = renderStartIndex
+	            state.startIndex = renderStartIndex;
 
 	            // var data = this.prepareData(props)
 
@@ -279,10 +280,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // state.topOffset = -sign * Math.ceil(scrollTop - state.renderStartIndex * this.props.rowHeight)
 
 	            // console.log(scrollTop, sign);
-	            ;
 	        } else {
-	            state.scrollTop = scrollTop;
-	        }
+	                state.scrollTop = scrollTop;
+	            }
 
 	        this.setState(state);
 	    },
@@ -1176,7 +1176,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onColumnResize(firstCol, firstSize, secondCol, secondSize);
 	    }
 	});
-	// this.checkRowHeight(this.props)
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
@@ -4357,7 +4356,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		refresh: refresh
 	};
 
-	var defaultStyles = {};
+	var defaultStyles = {
+		// gotoPrev: { marginRight: 10},
+		// gotoNext: { marginLeft: 10}
+	};
 
 	module.exports = React.createClass({
 
@@ -4748,9 +4750,6 @@ return /******/ (function(modules) { // webpackBootstrap
 			this.props.onPageChange(page);
 		}
 	});
-
-	// gotoPrev: { marginRight: 10},
-	// gotoNext: { marginLeft: 10}
 
 /***/ },
 /* 20 */
@@ -5671,12 +5670,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	    toLowerFirst     : __webpack_require__(39),
-	    toUpperFirst     : __webpack_require__(40),
-	    separate         : __webpack_require__(41),
-	    stripWhitespace  : __webpack_require__(42),
-	    compactWhitespace: __webpack_require__(43),
-	    camelize         : __webpack_require__(37),
+	    toLowerFirst     : __webpack_require__(37),
+	    toUpperFirst     : __webpack_require__(38),
+	    separate         : __webpack_require__(39),
+	    stripWhitespace  : __webpack_require__(40),
+	    compactWhitespace: __webpack_require__(41),
+	    camelize         : __webpack_require__(42),
 	    humanize         : __webpack_require__(44),
 	    hyphenate        : __webpack_require__(45),
 	    endsWith         : __webpack_require__(46),
@@ -5686,30 +5685,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict'
-
-	var toCamelFn = function(str, letter){
-	       return letter ? letter.toUpperCase(): ''
-	   }
-
-	var hyphenRe = __webpack_require__(38)
-
-	module.exports = function(str){
-	   return str?
-	          str.replace(hyphenRe, toCamelFn):
-	          ''
-	}
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	module.exports = /[-\s]+(.)?/g
-
-/***/ },
-/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = function(str){
@@ -5719,7 +5694,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 40 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -5731,7 +5706,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 41 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -5753,7 +5728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 42 */
+/* 40 */
 /***/ function(module, exports) {
 
 	var RE = /\s/g
@@ -5767,7 +5742,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 43 */
+/* 41 */
 /***/ function(module, exports) {
 
 	var RE = /\s+/g
@@ -5781,15 +5756,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict'
+
+	var toCamelFn = function(str, letter){
+	       return letter ? letter.toUpperCase(): ''
+	   }
+
+	var hyphenRe = __webpack_require__(43)
+
+	module.exports = function(str){
+	   return str?
+	          str.replace(hyphenRe, toCamelFn):
+	          ''
+	}
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	module.exports = /[-\s]+(.)?/g
+
+/***/ },
 /* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
-	var separate     = __webpack_require__(41)
-	var camelize     = __webpack_require__(37)
-	var toUpperFirst = __webpack_require__(40)
-	var hyphenRe     = __webpack_require__(38)
+	var separate     = __webpack_require__(39)
+	var camelize     = __webpack_require__(42)
+	var toUpperFirst = __webpack_require__(38)
+	var hyphenRe     = __webpack_require__(43)
 
 	function toLowerAndSpace(str, letter){
 	    return letter? ' ' + letter.toLowerCase(): ' '
@@ -5811,7 +5810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var separate = __webpack_require__(41)
+	var separate = __webpack_require__(39)
 
 	module.exports = function(name){
 	   return separate(name).toLowerCase()
@@ -5955,7 +5954,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var SLICE = Array.prototype.slice
 
-	    var curry = __webpack_require__(52),
+	    var curry = __webpack_require__(51),
 
 	        findFn = function(fn, target, onFound){
 	            // if (typeof target.find == 'function'){
@@ -6026,17 +6025,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	         *
 	         * @return the result of the first function in the enumeration
 	         */
-	        compose = __webpack_require__(53),
+	        compose = __webpack_require__(52),
 
-	        chain = __webpack_require__(54),
+	        chain = __webpack_require__(53),
 
-	        once = __webpack_require__(55),
+	        once = __webpack_require__(54),
 
-	        bindArgsArray = __webpack_require__(56),
+	        bindArgsArray = __webpack_require__(55),
 
-	        bindArgs = __webpack_require__(57),
+	        bindArgs = __webpack_require__(56),
 
-	        lockArgsArray = __webpack_require__(51),
+	        lockArgsArray = __webpack_require__(57),
 
 	        lockArgs = __webpack_require__(58),
 
@@ -6528,25 +6527,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var SLICE = Array.prototype.slice
-
-	module.exports = function(fn, args){
-
-	    return function(){
-	        if (!Array.isArray(args)){
-	            args = SLICE.call(args || [])
-	        }
-
-	        return fn.apply(this, args)
-	    }
-	}
-
-/***/ },
-/* 52 */
-/***/ function(module, exports) {
-
-	'use strict'
-
 	function curry(fn, n){
 
 	    if (typeof n !== 'number'){
@@ -6580,7 +6560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = curry
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -6613,7 +6593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -6638,7 +6618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = chain
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	'use once'
@@ -6662,7 +6642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = once
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -6682,16 +6662,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
 	var SLICE = Array.prototype.slice
-	var bindArgsArray = __webpack_require__(56)
+	var bindArgsArray = __webpack_require__(55)
 
 	module.exports = function(fn){
 	    return bindArgsArray(fn, SLICE.call(arguments,1))
+	}
+
+/***/ },
+/* 57 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	var SLICE = Array.prototype.slice
+
+	module.exports = function(fn, args){
+
+	    return function(){
+	        if (!Array.isArray(args)){
+	            args = SLICE.call(args || [])
+	        }
+
+	        return fn.apply(this, args)
+	    }
 	}
 
 /***/ },
@@ -6701,7 +6700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	var SLICE = Array.prototype.slice
-	var lockArgsArray = __webpack_require__(51)
+	var lockArgsArray = __webpack_require__(57)
 
 	module.exports = function(fn){
 	    return lockArgsArray(fn, SLICE.call(arguments, 1))
@@ -6713,7 +6712,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var curry = __webpack_require__(52)
+	var curry = __webpack_require__(51)
 
 	module.exports = curry(function(fn, value){
 	    return value != undefined && typeof value.map?
@@ -6727,7 +6726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var curry = __webpack_require__(52)
+	var curry = __webpack_require__(51)
 
 	module.exports = curry(function(prop, value){
 	    return value != undefined? value[prop]: undefined
@@ -6740,7 +6739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	var SLICE = Array.prototype.slice
-	var curry = __webpack_require__(52)
+	var curry = __webpack_require__(51)
 
 	module.exports = function(fn, count){
 	    return function(){
@@ -6755,7 +6754,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	var newify = __webpack_require__(63)
-	var curry  = __webpack_require__(52)
+	var curry  = __webpack_require__(51)
 
 	module.exports = curry(newify)
 
@@ -6838,13 +6837,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	module.exports = {
-	    'numeric'  : __webpack_require__(70),
-	    'number'   : __webpack_require__(71),
-	    'int'      : __webpack_require__(72),
-	    'float'    : __webpack_require__(73),
-	    'string'   : __webpack_require__(74),
-	    'function' : __webpack_require__(75),
-	    'object'   : __webpack_require__(69),
+	    'numeric'  : __webpack_require__(69),
+	    'number'   : __webpack_require__(70),
+	    'int'      : __webpack_require__(71),
+	    'float'    : __webpack_require__(72),
+	    'string'   : __webpack_require__(73),
+	    'function' : __webpack_require__(74),
+	    'object'   : __webpack_require__(75),
 	    'arguments': __webpack_require__(76),
 	    'boolean'  : __webpack_require__(77),
 	    'date'     : __webpack_require__(78),
@@ -6858,10 +6857,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var objectToString = Object.prototype.toString
-
 	module.exports = function(value){
-	    return objectToString.apply(value) === '[object Object]'
+	    return !isNaN( parseFloat( value ) ) && isFinite( value )
 	}
 
 /***/ },
@@ -6871,17 +6868,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict'
 
 	module.exports = function(value){
-	    return !isNaN( parseFloat( value ) ) && isFinite( value )
+	    return typeof value === 'number' && isFinite(value)
 	}
 
 /***/ },
 /* 71 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 
+	var number = __webpack_require__(70)
+
 	module.exports = function(value){
-	    return typeof value === 'number' && isFinite(value)
+	    return number(value) && (value === parseInt(value, 10))
 	}
 
 /***/ },
@@ -6890,22 +6889,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
-	var number = __webpack_require__(71)
+	var number = __webpack_require__(70)
 
 	module.exports = function(value){
-	    return number(value) && (value === parseInt(value, 10))
+	    return number(value) && (value === parseFloat(value, 10)) && !(value === parseInt(value, 10))
 	}
 
 /***/ },
 /* 73 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict'
 
-	var number = __webpack_require__(71)
-
 	module.exports = function(value){
-	    return number(value) && (value === parseFloat(value, 10)) && !(value === parseInt(value, 10))
+	    return typeof value == 'string'
 	}
 
 /***/ },
@@ -6914,8 +6911,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict'
 
+	var objectToString = Object.prototype.toString
+
 	module.exports = function(value){
-	    return typeof value == 'string'
+	    return objectToString.apply(value) === '[object Function]'
 	}
 
 /***/ },
@@ -6927,7 +6926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var objectToString = Object.prototype.toString
 
 	module.exports = function(value){
-	    return objectToString.apply(value) === '[object Function]'
+	    return objectToString.apply(value) === '[object Object]'
 	}
 
 /***/ },
@@ -8691,7 +8690,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var setupColumnResize = __webpack_require__(136);
 
 	var normalize = __webpack_require__(21);
-	var EVENT_NAMES = __webpack_require__(114);
+	var EVENT_NAMES = __webpack_require__(116);
 
 	function emptyFn() {}
 
@@ -9086,6 +9085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        event.nativeEvent.stopSort = true;
 
 	        this.showFilterMenu(column, event);
+	        // event.stopPropagation()
 	    },
 
 	    handleMouseUp: function handleMouseUp(column, event) {
@@ -9181,7 +9181,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        assign(style, props.defaultStyle);
 	    }
 	});
-	// event.stopPropagation()
 
 /***/ },
 /* 96 */
@@ -9191,7 +9190,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var MenuClass = __webpack_require__(97)
 
-	var MenuItem      = __webpack_require__(113)
+	var MenuItem      = __webpack_require__(115)
 	var MenuItemCell  = __webpack_require__(111)
 	var MenuSeparator = __webpack_require__(119)
 
@@ -9213,14 +9212,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React      = __webpack_require__(6)
 	var assign     = __webpack_require__(7)
 	var Region     = __webpack_require__(87)
-	var inTriangle = __webpack_require__(99)
-	var hasTouch = __webpack_require__(100)
+	var inTriangle = __webpack_require__(98)
+	var hasTouch = __webpack_require__(99)
 
 	var normalize = __webpack_require__(21)
 
-	var getMenuOffset = __webpack_require__(101)
-	var getConstrainRegion = __webpack_require__(105)
-	var getItemStyleProps = __webpack_require__(98)
+	var getMenuOffset = __webpack_require__(100)
+	var getConstrainRegion = __webpack_require__(104)
+	var getItemStyleProps = __webpack_require__(105)
 	var renderSubMenu     = __webpack_require__(106)
 	var renderChildren    = __webpack_require__(110)
 	var prepareItem       = __webpack_require__(112)
@@ -9228,7 +9227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var propTypes = __webpack_require__(120)
 	var ScrollContainer = __webpack_require__(121)
 
-	var MenuItem = __webpack_require__(113)
+	var MenuItem = __webpack_require__(115)
 
 	var MenuClass = React.createClass({
 
@@ -9775,33 +9774,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var assign = __webpack_require__(7)
-
-	module.exports = function(props, state){
-
-	    var itemStyle         = assign({}, props.defaultItemStyle, props.itemStyle)
-	    var itemOverStyle     = assign({}, props.defaultItemOverStyle, props.itemOverStyle)
-	    var itemActiveStyle   = assign({}, props.defaultItemActiveStyle, props.itemActiveStyle)
-	    var itemDisabledStyle = assign({}, props.defaultItemDisabledStyle, props.itemDisabledStyle)
-	    var itemExpandedStyle = assign({}, props.defaultItemExpandedStyle, props.itemExpandedStyle)
-	    var cellStyle     = assign({}, props.defaultCellStyle, props.cellStyle)
-
-	    return {
-	        itemStyle        : itemStyle,
-	        itemOverStyle    : itemOverStyle,
-	        itemActiveStyle  : itemActiveStyle,
-	        itemDisabledStyle: itemDisabledStyle,
-	        itemExpandedStyle: itemExpandedStyle,
-	        cellStyle        : cellStyle
-	    }
-	}
-
-/***/ },
-/* 99 */
 /***/ function(module, exports) {
 
 	//http://www.blackpawn.com/texts/pointinpoly/
@@ -9827,20 +9799,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 100 */
+/* 99 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 101 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var Region       = __webpack_require__(87)
-	var selectParent = __webpack_require__(102)
+	var selectParent = __webpack_require__(101)
 
 	module.exports = function(domNode){
 
@@ -9859,17 +9831,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 102 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var curry   = __webpack_require__(103)
+	var curry   = __webpack_require__(102)
 	var matches
 
 	module.exports = curry(function(selector, node){
 
-		matches = matches || __webpack_require__(104)
+		matches = matches || __webpack_require__(103)
 
 	    while (node = node.parentElement){
 	        if (matches.call(node, selector)){
@@ -9879,7 +9851,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	})
 
 /***/ },
-/* 103 */
+/* 102 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9917,7 +9889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = curry
 
 /***/ },
-/* 104 */
+/* 103 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9934,13 +9906,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 105 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var Region = __webpack_require__(87)
-	var selectParent = __webpack_require__(102)
+	var selectParent = __webpack_require__(101)
 
 	module.exports = function(constrainTo){
 	    var constrainRegion
@@ -9959,6 +9931,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    return constrainRegion
+	}
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var assign = __webpack_require__(7)
+
+	module.exports = function(props, state){
+
+	    var itemStyle         = assign({}, props.defaultItemStyle, props.itemStyle)
+	    var itemOverStyle     = assign({}, props.defaultItemOverStyle, props.itemOverStyle)
+	    var itemActiveStyle   = assign({}, props.defaultItemActiveStyle, props.itemActiveStyle)
+	    var itemDisabledStyle = assign({}, props.defaultItemDisabledStyle, props.itemDisabledStyle)
+	    var itemExpandedStyle = assign({}, props.defaultItemExpandedStyle, props.itemExpandedStyle)
+	    var cellStyle     = assign({}, props.defaultCellStyle, props.cellStyle)
+
+	    return {
+	        itemStyle        : itemStyle,
+	        itemOverStyle    : itemOverStyle,
+	        itemActiveStyle  : itemActiveStyle,
+	        itemDisabledStyle: itemDisabledStyle,
+	        itemExpandedStyle: itemExpandedStyle,
+	        cellStyle        : cellStyle
+	    }
 	}
 
 /***/ },
@@ -10197,7 +10196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var Region = __webpack_require__(87)
-	var getConstrainRegion = __webpack_require__(105)
+	var getConstrainRegion = __webpack_require__(104)
 
 	module.exports = function(props, subMenuRegion, targetAlignRegion, constrainTo){
 	    var constrainRegion = getConstrainRegion.call(this, constrainTo)
@@ -10396,8 +10395,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React  = __webpack_require__(6)
 	var assign = __webpack_require__(7)
 
-	var renderCells     = __webpack_require__(118)
-	var MenuItem        = __webpack_require__(113)
+	var renderCells     = __webpack_require__(113)
+	var MenuItem        = __webpack_require__(115)
 	var MenuItemFactory = React.createFactory(MenuItem)
 	var MenuSeparator   = __webpack_require__(119)
 
@@ -10441,14 +10440,42 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var renderCell = __webpack_require__(114)
+
+	module.exports = function(props) {
+	    return props.columns.map(renderCell.bind(null, props))
+	}
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React        = __webpack_require__(6)
+	var assign       = __webpack_require__(7)
+	var MenuItemCell = __webpack_require__(111)
+
+	module.exports = function(props, column) {
+	    var style = assign({}, props.defaultCellStyle, props.cellStyle)
+
+	    return React.createElement(MenuItemCell, {style: style}, props.data[column])
+	}
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var React         = __webpack_require__(6)
 	var assign        = __webpack_require__(7)
 	var normalize     = __webpack_require__(21)
-	var EVENT_NAMES   = __webpack_require__(114)
+	var EVENT_NAMES   = __webpack_require__(116)
 
-	var getMenuOffset = __webpack_require__(101)
+	var getMenuOffset = __webpack_require__(100)
 
-	var prepareChildren = __webpack_require__(116)
+	var prepareChildren = __webpack_require__(118)
 
 	var Menu = __webpack_require__(97)
 	var MenuItemCell = __webpack_require__(111)
@@ -10755,12 +10782,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = MenuItem
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(115)?
+	module.exports = __webpack_require__(117)?
 		{
 			onMouseDown: 'onTouchStart',
 			onMouseUp  : 'onTouchEnd',
@@ -10773,14 +10800,14 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 
 /***/ },
-/* 115 */
+/* 117 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = 'ontouchstart' in global || (global.DocumentTouch && document instanceof DocumentTouch)
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 116 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10788,7 +10815,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var React        = __webpack_require__(6)
 	var Menu         = __webpack_require__(97)
 	var MenuItemCell = __webpack_require__(111)
-	var renderCell   = __webpack_require__(117)
+	var renderCell   = __webpack_require__(114)
 	var cloneWithProps = __webpack_require__(107)
 
 	module.exports = function(props) {
@@ -10830,34 +10857,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    return children
-	}
-
-/***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React        = __webpack_require__(6)
-	var assign       = __webpack_require__(7)
-	var MenuItemCell = __webpack_require__(111)
-
-	module.exports = function(props, column) {
-	    var style = assign({}, props.defaultCellStyle, props.cellStyle)
-
-	    return React.createElement(MenuItemCell, {style: style}, props.data[column])
-	}
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var renderCell = __webpack_require__(117)
-
-	module.exports = function(props) {
-	    return props.columns.map(renderCell.bind(null, props))
 	}
 
 /***/ },
@@ -11716,28 +11715,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
 	 * Opera 11.6+, iOS 4.2+.
 	 *
+	 * Due to various browser bugs, sometimes the Object implementation will be used even
+	 * when the browser supports typed arrays.
+	 *
 	 * Note:
 	 *
-	 * - Implementation must support adding new properties to `Uint8Array` instances.
-	 *   Firefox 4-29 lacked support, fixed in Firefox 30+.
-	 *   See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+	 *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+	 *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
 	 *
-	 *  - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+	 *   - Safari 5-7 lacks support for changing the `Object.prototype.constructor` property
+	 *     on objects.
 	 *
-	 *  - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
-	 *    incorrect length in some situations.
+	 *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
 	 *
-	 * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they will
-	 * get the Object implementation, which is slower but will work correctly.
+	 *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+	 *     incorrect length in some situations.
+
+	 * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+	 * get the Object implementation, which is slower but behaves correctly.
 	 */
 	Buffer.TYPED_ARRAY_SUPPORT = (function () {
+	  function Bar () {}
 	  try {
-	    var buf = new ArrayBuffer(0)
-	    var arr = new Uint8Array(buf)
+	    var arr = new Uint8Array(1)
 	    arr.foo = function () { return 42 }
+	    arr.constructor = Bar
 	    return arr.foo() === 42 && // typed array instances can be augmented
+	        arr.constructor === Bar && // constructor can be set
 	        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
-	        new Uint8Array(1).subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+	        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
 	  } catch (e) {
 	    return false
 	  }
@@ -11815,8 +11821,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    throw new TypeError('must start with number, buffer, array or string')
 	  }
 
-	  if (typeof ArrayBuffer !== 'undefined' && object.buffer instanceof ArrayBuffer) {
-	    return fromTypedArray(that, object)
+	  if (typeof ArrayBuffer !== 'undefined') {
+	    if (object.buffer instanceof ArrayBuffer) {
+	      return fromTypedArray(that, object)
+	    }
+	    if (object instanceof ArrayBuffer) {
+	      return fromArrayBuffer(that, object)
+	    }
 	  }
 
 	  if (object.length) return fromArrayLike(that, object)
@@ -11849,6 +11860,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // of the old Buffer constructor.
 	  for (var i = 0; i < length; i += 1) {
 	    that[i] = array[i] & 255
+	  }
+	  return that
+	}
+
+	function fromArrayBuffer (that, array) {
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    // Return an augmented `Uint8Array` instance, for best performance
+	    array.byteLength
+	    that = Buffer._augment(new Uint8Array(array))
+	  } else {
+	    // Fallback: Return an object instance of the Buffer class
+	    that = fromTypedArray(that, new Uint8Array(array))
 	  }
 	  return that
 	}
@@ -11970,8 +11993,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (list.length === 0) {
 	    return new Buffer(0)
-	  } else if (list.length === 1) {
-	    return list[0]
 	  }
 
 	  var i
@@ -12146,13 +12167,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  throw new TypeError('val must be string, number or Buffer')
 	}
 
-	// `get` will be removed in Node 0.13+
+	// `get` is deprecated
 	Buffer.prototype.get = function get (offset) {
 	  console.log('.get() is deprecated. Access using array indexes instead.')
 	  return this.readUInt8(offset)
 	}
 
-	// `set` will be removed in Node 0.13+
+	// `set` is deprecated
 	Buffer.prototype.set = function set (v, offset) {
 	  console.log('.set() is deprecated. Access using array indexes instead.')
 	  return this.writeUInt8(v, offset)
@@ -12293,20 +12314,99 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function utf8Slice (buf, start, end) {
-	  var res = ''
-	  var tmp = ''
 	  end = Math.min(buf.length, end)
+	  var res = []
 
-	  for (var i = start; i < end; i++) {
-	    if (buf[i] <= 0x7F) {
-	      res += decodeUtf8Char(tmp) + String.fromCharCode(buf[i])
-	      tmp = ''
-	    } else {
-	      tmp += '%' + buf[i].toString(16)
+	  var i = start
+	  while (i < end) {
+	    var firstByte = buf[i]
+	    var codePoint = null
+	    var bytesPerSequence = (firstByte > 0xEF) ? 4
+	      : (firstByte > 0xDF) ? 3
+	      : (firstByte > 0xBF) ? 2
+	      : 1
+
+	    if (i + bytesPerSequence <= end) {
+	      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+	      switch (bytesPerSequence) {
+	        case 1:
+	          if (firstByte < 0x80) {
+	            codePoint = firstByte
+	          }
+	          break
+	        case 2:
+	          secondByte = buf[i + 1]
+	          if ((secondByte & 0xC0) === 0x80) {
+	            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+	            if (tempCodePoint > 0x7F) {
+	              codePoint = tempCodePoint
+	            }
+	          }
+	          break
+	        case 3:
+	          secondByte = buf[i + 1]
+	          thirdByte = buf[i + 2]
+	          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+	            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+	            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+	              codePoint = tempCodePoint
+	            }
+	          }
+	          break
+	        case 4:
+	          secondByte = buf[i + 1]
+	          thirdByte = buf[i + 2]
+	          fourthByte = buf[i + 3]
+	          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+	            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+	            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+	              codePoint = tempCodePoint
+	            }
+	          }
+	      }
 	    }
+
+	    if (codePoint === null) {
+	      // we did not generate a valid codePoint so insert a
+	      // replacement char (U+FFFD) and advance only 1 byte
+	      codePoint = 0xFFFD
+	      bytesPerSequence = 1
+	    } else if (codePoint > 0xFFFF) {
+	      // encode to utf16 (surrogate pair dance)
+	      codePoint -= 0x10000
+	      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+	      codePoint = 0xDC00 | codePoint & 0x3FF
+	    }
+
+	    res.push(codePoint)
+	    i += bytesPerSequence
 	  }
 
-	  return res + decodeUtf8Char(tmp)
+	  return decodeCodePointsArray(res)
+	}
+
+	// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+	// the lowest limit is Chrome, with 0x10000 args.
+	// We go 1 magnitude less, for safety
+	var MAX_ARGUMENTS_LENGTH = 0x1000
+
+	function decodeCodePointsArray (codePoints) {
+	  var len = codePoints.length
+	  if (len <= MAX_ARGUMENTS_LENGTH) {
+	    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+	  }
+
+	  // Decode in chunks to avoid "call stack size exceeded".
+	  var res = ''
+	  var i = 0
+	  while (i < len) {
+	    res += String.fromCharCode.apply(
+	      String,
+	      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+	    )
+	  }
+	  return res
 	}
 
 	function asciiSlice (buf, start, end) {
@@ -12841,9 +12941,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  var len = end - start
+	  var i
 
-	  if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
-	    for (var i = 0; i < len; i++) {
+	  if (this === target && start < targetStart && targetStart < end) {
+	    // descending copy from end
+	    for (i = len - 1; i >= 0; i--) {
+	      target[i + targetStart] = this[i + start]
+	    }
+	  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+	    // ascending copy from start
+	    for (i = 0; i < len; i++) {
 	      target[i + targetStart] = this[i + start]
 	    }
 	  } else {
@@ -12919,7 +13026,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // save reference to original Uint8Array set method before overwriting
 	  arr._set = arr.set
 
-	  // deprecated, will be removed in node 0.13+
+	  // deprecated
 	  arr.get = BP.get
 	  arr.set = BP.set
 
@@ -12975,7 +13082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return arr
 	}
 
-	var INVALID_BASE64_RE = /[^+\/0-9A-z\-]/g
+	var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
 
 	function base64clean (str) {
 	  // Node strips out invalid characters like \n and \t from the string, base64-js does not
@@ -13005,28 +13112,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var length = string.length
 	  var leadSurrogate = null
 	  var bytes = []
-	  var i = 0
 
-	  for (; i < length; i++) {
+	  for (var i = 0; i < length; i++) {
 	    codePoint = string.charCodeAt(i)
 
 	    // is surrogate component
 	    if (codePoint > 0xD7FF && codePoint < 0xE000) {
 	      // last char was a lead
-	      if (leadSurrogate) {
-	        // 2 leads in a row
-	        if (codePoint < 0xDC00) {
-	          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
-	          leadSurrogate = codePoint
-	          continue
-	        } else {
-	          // valid surrogate pair
-	          codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
-	          leadSurrogate = null
-	        }
-	      } else {
+	      if (!leadSurrogate) {
 	        // no lead yet
-
 	        if (codePoint > 0xDBFF) {
 	          // unexpected trail
 	          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
@@ -13035,17 +13129,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	          // unpaired lead
 	          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
 	          continue
-	        } else {
-	          // valid lead
-	          leadSurrogate = codePoint
-	          continue
 	        }
+
+	        // valid lead
+	        leadSurrogate = codePoint
+
+	        continue
 	      }
+
+	      // 2 leads in a row
+	      if (codePoint < 0xDC00) {
+	        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	        leadSurrogate = codePoint
+	        continue
+	      }
+
+	      // valid surrogate pair
+	      codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
 	    } else if (leadSurrogate) {
 	      // valid bmp char, but last char was a lead
 	      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
-	      leadSurrogate = null
 	    }
+
+	    leadSurrogate = null
 
 	    // encode utf8
 	    if (codePoint < 0x80) {
@@ -13064,7 +13170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        codePoint >> 0x6 & 0x3F | 0x80,
 	        codePoint & 0x3F | 0x80
 	      )
-	    } else if (codePoint < 0x200000) {
+	    } else if (codePoint < 0x110000) {
 	      if ((units -= 4) < 0) break
 	      bytes.push(
 	        codePoint >> 0x12 | 0xF0,
@@ -13115,14 +13221,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dst[i + offset] = src[i]
 	  }
 	  return i
-	}
-
-	function decodeUtf8Char (str) {
-	  try {
-	    return decodeURIComponent(str)
-	  } catch (err) {
-	    return String.fromCharCode(0xFFFD) // UTF 8 invalid char
-	  }
 	}
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(127).Buffer))
@@ -13254,7 +13352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		exports.toByteArray = b64ToByteArray
 		exports.fromByteArray = uint8ToBase64
-	}(false ? (this.base64js = {}) : exports))
+	}( false ? (this.base64js = {}) : exports))
 
 
 /***/ },
@@ -13452,7 +13550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var assign = __webpack_require__(7);
 	var normalize = __webpack_require__(21);
 
-	var EVENT_NAMES = __webpack_require__(114);
+	var EVENT_NAMES = __webpack_require__(116);
 
 	var TEXT_ALIGN_2_JUSTIFY = {
 	    right: 'flex-end',
@@ -13500,7 +13598,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            defaultStyle: {}
 	        };
 	    },
-
+	    getInitialState: function getInitialState() {
+	        return { isUpdating: false };
+	    },
 	    prepareClassName: function prepareClassName(props) {
 	        var index = props.index;
 	        var columns = props.columns;
@@ -13524,6 +13624,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        if (textAlign) {
 	            className += ' z-align-' + textAlign;
+	        }
+
+	        if (this.state.isUpdating) {
+	            className += ' change';
 	        }
 
 	        return className;
@@ -13558,7 +13662,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return props;
 	    },
-
+	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
+	        if ((typeof this.props.text === "string" || typeof this.props.text === "number") && prevProps.text !== this.props.text && !this.state.isUpdating && !prevState.isUpdating) {
+	            var elm = $(this.getDOMNode());
+	            elm.one('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', (function () {
+	                this.setState({ isUpdating: false });
+	            }).bind(this));
+	            this.setState({ isUpdating: true });
+	        }
+	    },
 	    render: function render() {
 	        var props = this.p = this.prepareProps(this.props);
 
@@ -13586,6 +13698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            props.children
 	        );
 	    }
+
 	});
 
 	Cell.className = 'z-cell';
@@ -13989,9 +14102,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React = __webpack_require__(6);
-	var renderMenu = __webpack_require__(142);
-	var renderRow = __webpack_require__(143);
-	var tableStyle = __webpack_require__(141);
+	var renderMenu = __webpack_require__(141);
+	var renderRow = __webpack_require__(142);
+	var tableStyle = __webpack_require__(144);
 	var slice = __webpack_require__(139);
 	var LoadMask = __webpack_require__(8);
 
@@ -14023,23 +14136,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 141 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var normalize = __webpack_require__(21);
-
-	var colors = ['blue', 'red', 'magenta'];
-	module.exports = function (props) {
-	    var scrollTop = props.virtualRendering ? -(props.topOffset || 0) : props.scrollTop;
-
-	    return normalize({
-	        transform: 'translate3d(' + -props.scrollLeft + 'px, ' + -scrollTop + 'px, 0px)'
-	    });
-	};
-
-/***/ },
-/* 142 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14056,7 +14152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 143 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14064,7 +14160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var assign = __webpack_require__(7);
 	var React = __webpack_require__(6);
 
-	var Row = __webpack_require__(144);
+	var Row = __webpack_require__(143);
 	var RowFactory = React.createFactory(Row);
 
 	var renderCell = Row.prototype.renderCell;
@@ -14179,7 +14275,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 144 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14390,6 +14486,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 /***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var normalize = __webpack_require__(21);
+
+	var colors = ['blue', 'red', 'magenta'];
+	module.exports = function (props) {
+	    var scrollTop = props.virtualRendering ? -(props.topOffset || 0) : props.scrollTop;
+
+	    return normalize({
+	        transform: 'translate3d(' + -props.scrollLeft + 'px, ' + -scrollTop + 'px, 0px)'
+	    });
+	};
+
+/***/ },
 /* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -14397,11 +14510,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(6);
 
-	var Row = __webpack_require__(144);
+	var Row = __webpack_require__(143);
 	var Cell = __webpack_require__(134);
 	var CellFactory = React.createFactory(Cell);
 
-	var renderRow = __webpack_require__(143);
+	var renderRow = __webpack_require__(142);
 
 	function renderData(props, data, depth) {
 

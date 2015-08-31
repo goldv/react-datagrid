@@ -56,7 +56,9 @@ var Cell = React.createClass({
             defaultStyle: {}
         }
     },
-
+    getInitialState: function() {
+        return {isUpdating: 0}
+    },
     prepareClassName: function(props) {
         var index     = props.index
         var columns   = props.columns
@@ -80,6 +82,12 @@ var Cell = React.createClass({
 
         if (textAlign){
             className += ' z-align-' + textAlign
+        }
+
+        if(this.state.isUpdating > 0){
+            className += ' change-positive'
+        } else if(this.state.isUpdating < 0){
+            className += ' change-negative'
         }
 
         return className
@@ -114,7 +122,27 @@ var Cell = React.createClass({
 
         return props
     },
+    componentDidUpdate: function(prevProps, prevState) {
+      var isUpdating = 0;
 
+      if(prevState.isUpdating != 0 && this.state.isUpdating == 0){
+        if( typeof this.props.text === "string" && prevProps.text !== this.props.text){
+          isUpdating = 1;
+        }else if( typeof this.props.text === "number" && prevProps.text > this.props.text){
+          isUpdating = -1;
+        } else if( typeof this.props.text === "number" && prevProps.text < this.props.text){
+          isUpdating = 1;
+        }
+      }
+
+      if(isUpdating != 0){
+        var elm = $(this.getDOMNode())
+        elm.one('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){
+          this.setState({isUpdating : 0})
+        }.bind(this))
+        this.setState({isUpdating : isUpdating})
+      }
+    },
     render: function(){
         var props = this.p = this.prepareProps(this.props)
 
@@ -146,6 +174,8 @@ var Cell = React.createClass({
             </div>
         )
     }
+
+
 })
 
 Cell.className = 'z-cell'
