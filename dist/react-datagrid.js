@@ -13599,7 +13599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	    },
 	    getInitialState: function getInitialState() {
-	        return { isUpdating: false };
+	        return { isUpdating: 0 };
 	    },
 	    prepareClassName: function prepareClassName(props) {
 	        var index = props.index;
@@ -13626,8 +13626,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            className += ' z-align-' + textAlign;
 	        }
 
-	        if (this.state.isUpdating) {
-	            className += ' change';
+	        if (this.state.isUpdating > 0) {
+	            className += ' change-positive';
+	        } else if (this.state.isUpdating < 0) {
+	            className += ' change-negative';
 	        }
 
 	        return className;
@@ -13663,12 +13665,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return props;
 	    },
 	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-	        if ((typeof this.props.text === "string" || typeof this.props.text === "number") && prevProps.text !== this.props.text && !this.state.isUpdating && !prevState.isUpdating) {
+	        var isUpdating = 0;
+
+	        if (prevState.isUpdating == 0 && this.state.isUpdating == 0) {
+	            if (typeof this.props.text === "string" && prevProps.text !== this.props.text) {
+	                isUpdating = 1;
+	            } else if (typeof this.props.text === "number" && prevProps.text > this.props.text) {
+	                isUpdating = -1;
+	            } else if (typeof this.props.text === "number" && prevProps.text < this.props.text) {
+	                isUpdating = 1;
+	            }
+	        }
+
+	        if (isUpdating != 0) {
 	            var elm = $(this.getDOMNode());
 	            elm.one('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', (function () {
-	                this.setState({ isUpdating: false });
+	                this.setState({ isUpdating: 0 });
 	            }).bind(this));
-	            this.setState({ isUpdating: true });
+	            this.setState({ isUpdating: isUpdating });
 	        }
 	    },
 	    render: function render() {

@@ -125,7 +125,7 @@ var Cell = React.createClass({
     componentDidUpdate: function(prevProps, prevState) {
       var isUpdating = 0;
 
-      if(prevState.isUpdating != 0 && this.state.isUpdating == 0){
+      if(prevState.isUpdating == 0 && this.state.isUpdating == 0){
         if( typeof this.props.text === "string" && prevProps.text !== this.props.text){
           isUpdating = 1;
         }else if( typeof this.props.text === "number" && prevProps.text > this.props.text){
