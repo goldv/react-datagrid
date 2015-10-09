@@ -49,7 +49,7 @@ module.exports = function(header, props, column, event){
             columnData = props.columns.map(function(column, i){
                 var region = Region.from(columnHeaders[i])
 
-                if (column === dragColumn){
+                if (column.name === dragColumn.name){
                     dragColumnIndex = i
                     shiftRegion = region.clone()
                 }

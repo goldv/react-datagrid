@@ -24,7 +24,7 @@ var renderCell = Row.prototype.renderCell
  */
 module.exports = function renderRow(props, data, index, fn){
     var factory     = props.rowFactory || RowFactory
-    var key         = data[props.idProperty]
+    var key         = data.get(props.idProperty)
     var selectedKey = key
     var renderKey   = key
 
@@ -54,6 +54,7 @@ module.exports = function renderRow(props, data, index, fn){
         rowHeight  : props.rowHeight,
         minWidth   : props.minRowWidth - props.scrollbarSize,
         columns    : props.columns,
+        columnsActive : props.columnsActive,
 
         rowContextMenu: props.rowContextMenu,
         showMenu: props.showMenu,

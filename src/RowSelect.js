@@ -38,7 +38,7 @@ module.exports = {
         var idProperty = this.props.idProperty
 
         for (; i < len; i++){
-            id = data[i][idProperty]
+            id = data[i].get(idProperty)
 
             if (selected[id]){
                 index = i
@@ -74,7 +74,7 @@ module.exports = {
         }
 
         var selectedId = newSelected?
-                            data[props.idProperty]:
+                            data.get(props.idProperty):
                             null
 
         this.notifySelection(selectedId, data)
@@ -99,7 +99,7 @@ module.exports = {
 
             removeArray.forEach(function(item){
                 if (item){
-                    var id = item[props.idProperty]
+                    var id = item.get(props.idProperty)
                     delete map[id]
                 }
             })
@@ -107,7 +107,7 @@ module.exports = {
 
         data.forEach(function(item){
             if (item){
-                var id = item[props.idProperty]
+                var id = item.get(props.idProperty)
                 map[id] = item
             }
         })
@@ -121,7 +121,7 @@ module.exports = {
         var isSelected = this.isRowSelected(data)
 
         var clone = assign({}, selected)
-        var id    = data[this.p.idProperty]
+        var id    = data.get(this.p.idProperty)
 
         if (isSelected){
             delete clone[id]
@@ -205,7 +205,7 @@ module.exports = {
 
     isRowSelected: function(data){
         var selectedMap = this.getSelectedMap()
-        var id          = data[this.props.idProperty]
+        var id          = data.get(this.props.idProperty)
 
         return selectedMap[id]
     },

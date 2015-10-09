@@ -86,10 +86,10 @@ function groupArrayByField(data, field){
 
     var fieldName      = typeof field == 'string'?
                             field:
-                            field.name
+                            field.name;
 
-    ;(data || []).forEach(function(item){
-        var itemKey = item[fieldName]
+    (data || []).forEach(function(item){
+        var itemKey = item.get(fieldName)
 
         if (groupKeys[itemKey]){
             groupKeys[itemKey].push(item)

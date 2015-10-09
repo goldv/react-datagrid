@@ -11,6 +11,7 @@ var findIndexByName = require('../utils/findIndexByName')
 var Cell    = require('../Cell')
 var setupColumnDrag   = require('./setupColumnDrag')
 var setupColumnResize = require('./setupColumnResize')
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var normalize   = require('react-style-normalizer')
 var EVENT_NAMES = require('react-event-names')
@@ -113,6 +114,12 @@ module.exports = React.createClass({
             dragColumn: null,
             shiftIndexes: null
         }
+    },
+
+    shouldComponentUpdate : function(nextProps, nextState){
+        return (nextProps.columnsActive !== this.props.columnsActive) ||
+               (nextState.mouseOver !== this.state.mouseOver) ||
+               (nextState.dragging !== this.state.dragging)
     },
 
     render: function() {

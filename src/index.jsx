@@ -113,7 +113,8 @@ module.exports = React.createClass({
         scrollBy         : PropTypes.numeric,
         rowHeight        : PropTypes.numeric,
         sortInfo         : PropTypes.sortInfo,
-        columns          : PropTypes.column,
+        activeColumns    : React.PropTypes.object,
+        //columns          : PropTypes.column,
 
         data: function(props, name){
             var value = props[name]
@@ -341,6 +342,8 @@ module.exports = React.createClass({
         return (props.headerFactory || HeaderFactory)({
             scrollLeft       : state.scrollLeft,
             resizing         : state.resizing,
+            columnsActive    : props.columnsActive,
+            groupBy          : props.groupBy,
             columns          : columns,
             allColumns       : allColumns,
             columnVisibility : state.visibility,
@@ -609,6 +612,7 @@ module.exports = React.createClass({
     prepareProps: function(thisProps, state){
         var props = assign({}, thisProps)
 
+        props.columns    = props.columnsActive.toJS();
         props.loading    = this.prepareLoading(props)
         props.data       = this.prepareData(props)
         props.dataSource = this.prepareDataSource(props)

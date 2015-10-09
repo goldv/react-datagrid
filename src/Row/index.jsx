@@ -8,6 +8,7 @@ var Cell        = require('../Cell')
 var CellFactory = React.createFactory(Cell)
 var ReactMenu = require('react-menus')
 var ReactMenuFactory = React.createFactory(ReactMenu)
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 module.exports = React.createClass({
 
@@ -30,6 +31,12 @@ module.exports = React.createClass({
     return {
       mouseOver: false
     }
+  },
+
+  shouldComponentUpdate : function(nextProps, nextState){
+    return (nextProps.data !== this.props.data) ||
+           (nextProps.columnsActive !== this.props.columnsActive) ||
+           (nextState.mouseOver !== this.state.mouseOver)
   },
 
   render: function() {
@@ -138,7 +145,8 @@ module.exports = React.createClass({
 
   renderCell: function(props, column, index){
 
-    var text = props.data[column.name]
+    var text = props.data.get(column.name)
+
     var columns = props.columns
 
     var cellProps = {

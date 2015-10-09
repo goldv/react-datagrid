@@ -3,6 +3,7 @@
 var React  = require('react')
 var assign = require('object-assign')
 var normalize = require('react-style-normalizer')
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var EVENT_NAMES = require('react-event-names')
 
@@ -24,6 +25,7 @@ function copyProps(target, source, list){
 var PropTypes = React.PropTypes
 
 var Cell = React.createClass({
+
 
     displayName: 'ReactDataGrid.Cell',
 
@@ -126,9 +128,7 @@ var Cell = React.createClass({
       var isUpdating = 0;
 
       if(prevState.isUpdating == 0 && this.state.isUpdating == 0){
-        if( typeof this.props.text === "string" && prevProps.text !== this.props.text){
-          isUpdating = 1;
-        }else if( typeof this.props.text === "number" && prevProps.text > this.props.text){
+        if( typeof this.props.text === "number" && prevProps.text > this.props.text){
           isUpdating = -1;
         } else if( typeof this.props.text === "number" && prevProps.text < this.props.text){
           isUpdating = 1;
@@ -142,6 +142,9 @@ var Cell = React.createClass({
         }.bind(this))
         this.setState({isUpdating : isUpdating})
       }
+    },
+    shouldComponentUpdate : function(nextProps, nextState){
+        return (nextProps.text !== this.props.text) || (nextProps.columnsActive !== this.props.columnsActive)
     },
     render: function(){
         var props = this.p = this.prepareProps(this.props)
