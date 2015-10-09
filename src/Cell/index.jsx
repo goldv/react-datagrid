@@ -3,7 +3,6 @@
 var React  = require('react')
 var assign = require('object-assign')
 var normalize = require('react-style-normalizer')
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var EVENT_NAMES = require('react-event-names')
 

@@ -8,7 +8,6 @@ var Cell        = require('../Cell')
 var CellFactory = React.createFactory(Cell)
 var ReactMenu = require('react-menus')
 var ReactMenuFactory = React.createFactory(ReactMenu)
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 module.exports = React.createClass({
 
