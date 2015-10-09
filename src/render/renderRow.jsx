@@ -55,6 +55,7 @@ module.exports = function renderRow(props, data, index, fn){
         minWidth   : props.minRowWidth - props.scrollbarSize,
         columns    : props.columns,
         columnsActive : props.columnsActive,
+        groupBy    : props.groupBy,
 
         rowContextMenu: props.rowContextMenu,
         showMenu: props.showMenu,

@@ -33,9 +33,14 @@ module.exports = React.createClass({
   },
 
   shouldComponentUpdate : function(nextProps, nextState){
+    var currentGroupsLength = !this.props.groupBy ? 0 : this.props.groupBy.length;
+    var nextGroupsLength = !nextProps.groupBy ? 0 : nextProps.groupBy.length;
+
+    var groupsChanged = nextGroupsLength !== currentGroupsLength;
+
     return (nextProps.data !== this.props.data) ||
            (nextProps.columnsActive !== this.props.columnsActive) ||
-           (nextState.mouseOver !== this.state.mouseOver)
+           (nextState.mouseOver !== this.state.mouseOver) || groupsChanged;
   },
 
   render: function() {
