@@ -1,6 +1,6 @@
 {
   "name": "react-datagrid",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "description": "React DataGrid",
   "main": "lib/index.js",
   "scripts": {
@@ -81,6 +81,9 @@
   },
   "peerDependencies": {
     "react": ">=0.13.0"
+  },
+  "publishConfig" : {
+    "registry" : "https://repo.algotrader.ch/nexus/content/repositories/npmsnapshots/"
   },
   "author": "ZippyUI <contact@zippyui.com>",
   "contributors": [],
