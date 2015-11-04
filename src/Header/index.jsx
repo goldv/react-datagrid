@@ -176,7 +176,7 @@ module.exports = React.createClass({
             left: 0
         }
 
-        var menu = this.renderColumnMenu(props, state, column, index)
+        //var menu = this.renderColumnMenu(props, state, column, index)
 
         if (state.dragColumn && state.shiftIndexes && state.shiftIndexes[index]){
             style.left = state.shiftSize
@@ -252,7 +252,6 @@ module.exports = React.createClass({
                 {...events}
             >
                 {filter}
-                {menu}
                 {resizer}
             </Cell>
         )
@@ -434,6 +433,7 @@ module.exports = React.createClass({
 
         if (column.sortable){
             this.toggleSort(column)
+            this.forceUpdate();
         }
     },
 

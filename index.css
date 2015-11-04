@@ -1134,7 +1134,6 @@ html.u-app body * {
   border-left: 1px solid #a8a8a8;
 }
 .react-datagrid.z-with-column-menu .z-column-header .z-show-filter {
-  right: 15px;
   background: #fff;
 }
 .react-datagrid.z-with-column-menu .z-column-header.z-filterable .z-show-filter.z-active,
