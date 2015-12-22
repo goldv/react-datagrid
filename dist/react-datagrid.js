@@ -13606,9 +13606,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            defaultStyle: {}
 	        };
 	    },
-	    getInitialState: function getInitialState() {
-	        return { isUpdating: 0 };
-	    },
 	    prepareClassName: function prepareClassName(props) {
 	        var index = props.index;
 	        var columns = props.columns;
@@ -13632,12 +13629,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        if (textAlign) {
 	            className += ' z-align-' + textAlign;
-	        }
-
-	        if (this.state.isUpdating > 0) {
-	            className += ' change-positive';
-	        } else if (this.state.isUpdating < 0) {
-	            className += ' change-negative';
 	        }
 
 	        return className;
@@ -13672,29 +13663,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return props;
 	    },
-	    componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
-	        var isUpdating = 0;
-
-	        if (prevState.isUpdating == 0 && this.state.isUpdating == 0 && this.props.rowIndex == prevProps.rowIndex) {
-	            if (typeof this.props.text === "number" && prevProps.text > this.props.text) {
-	                isUpdating = -1;
-	            } else if (typeof this.props.text === "number" && prevProps.text < this.props.text) {
-	                isUpdating = 1;
-	            }
-	        }
-
-	        if (isUpdating != 0) {
-	            this.setState({ isUpdating: isUpdating });
-
-	            var elm = $(this.getDOMNode());
-
-	            elm.one('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', (function () {
-	                this.setState({ isUpdating: 0 });
-	            }).bind(this));
-	        }
-	    },
 	    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-	        return nextProps.text !== this.props.text || (nextProps.columnsActive !== this.props.columnsActive || this.state.isUpdating !== nextState.isUpdating);
+	        return nextProps.text !== this.props.text || nextProps.columnsActive !== this.props.columnsActive;
 	    },
 	    render: function render() {
 	        var props = this.p = this.prepareProps(this.props);
