@@ -13843,7 +13843,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    event.preventDefault();
 
-	    var columns = props.columns;
+	    var columns = props.activeColumns.toJS();
 	    var index = findIndexByName(columns, column.name);
 	    var proxyLeft = Region.from(event.target).right;
 
